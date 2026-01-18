@@ -1,0 +1,72 @@
+<svg viewBox="0 0 400 150" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="headGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#00d4ff;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#0099ff;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#006aff;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="glowGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#ff00ff;stop-opacity:0.8" />
+      <stop offset="100%" style="stop-color:#0099ff;stop-opacity:0.8" />
+    </linearGradient>
+  </defs>
+  
+  <!-- AI Head Profile -->
+  <g transform="translate(60, 40)">
+    <!-- Head shape -->
+    <ellipse cx="0" cy="0" rx="35" ry="40" fill="url(#headGradient)" stroke="#00d4ff" stroke-width="2" opacity="0.95"/>
+    
+    <!-- Face contour -->
+    <path d="M -15 -25 Q -20 -15 -20 0 Q -20 15 -10 25" stroke="#0066ff" stroke-width="1.5" fill="none" opacity="0.6"/>
+    
+    <!-- Large eye with glow -->
+    <g>
+      <circle cx="10" cy="-10" r="12" fill="none" stroke="#00d4ff" stroke-width="2" opacity="0.8"/>
+      <circle cx="10" cy="-10" r="9" fill="#0099ff" opacity="0.7"/>
+      <circle cx="12" cy="-8" r="6" fill="#00ffff" opacity="0.9"/>
+      <circle cx="13" cy="-7" r="3" fill="#ffffff"/>
+      <!-- Glow effect -->
+      <circle cx="10" cy="-10" r="15" fill="none" stroke="#00d4ff" stroke-width="1" opacity="0.3"/>
+    </g>
+    
+    <!-- Secondary eye (back) -->
+    <g opacity="0.6">
+      <circle cx="-15" cy="-5" r="8" fill="none" stroke="#9933ff" stroke-width="1.5"/>
+      <circle cx="-15" cy="-5" r="5" fill="#9933ff" opacity="0.6"/>
+    </g>
+    
+    <!-- Circuit patterns on head -->
+    <line x1="-25" y1="-15" x2="-15" y2="-15" stroke="#0066ff" stroke-width="1" opacity="0.5"/>
+    <line x1="-20" y1="-20" x2="-20" y2="-10" stroke="#0066ff" stroke-width="1" opacity="0.5"/>
+    <circle cx="-15" cy="-15" r="1.5" fill="#00ffff" opacity="0.7"/>
+    
+    <line x1="20" y1="15" x2="30" y2="15" stroke="#ff00ff" stroke-width="1" opacity="0.5"/>
+    <line x1="25" y1="10" x2="25" y2="20" stroke="#ff00ff" stroke-width="1" opacity="0.5"/>
+    <circle cx="25" cy="15" r="1.5" fill="#ff00ff" opacity="0.7"/>
+    
+    <!-- Neck connector -->
+    <rect x="-8" y="35" width="16" height="12" fill="url(#glowGradient)" rx="2" opacity="0.8"/>
+  </g>
+  
+  <!-- Shoulder/Body hint -->
+  <ellipse cx="60" cy="100" rx="45" ry="20" fill="#0099ff" opacity="0.6"/>
+  <circle cx="35" cy="95" r="18" fill="#ff00ff" opacity="0.5"/>
+  <circle cx="85" cy="95" r="18" fill="#00d4ff" opacity="0.5"/>
+  
+  <!-- Text: AgentX -->
+  <text x="160" y="70" font-family="Arial, Helvetica, sans-serif" font-size="48" font-weight="bold" fill="#ffffff" letter-spacing="2">
+    AgentX
+  </text>
+  
+  <!-- Text: Pro Testers -->
+  <text x="160" y="105" font-family="Arial, Helvetica, sans-serif" font-size="20" fill="#00d4ff" letter-spacing="3" font-weight="300">
+    Pro Testers
+  </text>
+  
+  <!-- Decorative circuit lines -->
+  <line x1="150" y1="50" x2="140" y2="50" stroke="#00d4ff" stroke-width="1" opacity="0.4"/>
+  <circle cx="138" cy="50" r="1.5" fill="#00d4ff" opacity="0.6"/>
+  
+  <line x1="380" y1="60" x2="390" y2="60" stroke="#ff00ff" stroke-width="1" opacity="0.4"/>
+  <circle cx="392" cy="60" r="1.5" fill="#ff00ff" opacity="0.6"/>
+</svg>

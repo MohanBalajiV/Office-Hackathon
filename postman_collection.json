@@ -1,0 +1,205 @@
+{
+  "info": {
+    "name": "User Story to Tests API",
+    "description": "API collection for generating test cases from user stories using Jira integration and LLM",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Health Check",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/health",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "health"]
+        },
+        "description": "Check if the backend server is running"
+      },
+      "response": []
+    },
+    {
+      "name": "Jira",
+      "item": [
+        {
+          "name": "Connect to Jira",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"baseUrl\": \"https://your-jira-instance.atlassian.net\",\n  \"email\": \"your-email@example.com\",\n  \"apiToken\": \"your-jira-api-token\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/jira/connect",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "jira", "connect"]
+            },
+            "description": "Connect to Jira using credentials. Stores credentials in server session for subsequent requests."
+          },
+          "response": []
+        },
+        {
+          "name": "Get All Stories",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/jira/stories",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "jira", "stories"]
+            },
+            "description": "Retrieve recent stories from connected Jira instance"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Story Details",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/jira/story/PROJ-123",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "jira", "story", "PROJ-123"]
+            },
+            "description": "Retrieve details of a specific story by key (e.g., PROJ-123)"
+          },
+          "response": []
+        },
+        {
+          "name": "Debug - Get Session Credentials",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/jira/_store",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "jira", "_store"]
+            },
+            "description": "Debug endpoint - returns session-stored credentials (development only)"
+          },
+          "response": []
+        },
+        {
+          "name": "Create Test Subtask",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"parentKey\": \"PROJ-123\",\n  \"description\": \"Generated test cases attached as a subtask.\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/jira/create-test-subtask",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "jira", "create-test-subtask"]
+            },
+            "description": "Create a Jira sub-task under the given parent issue to hold generated test cases."
+          },
+          "response": []
+        },
+        {
+          "name": "Upload Test Cases (attachment)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"issueKey\": \"PROJ-123\",\n  \"fileName\": \"TestCases.xlsx\",\n  \"fileData\": \"<base64-encoded-file-data>\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/jira/upload-test-cases",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "jira", "upload-test-cases"]
+            },
+            "description": "Upload a base64-encoded file as an attachment to the specified Jira issue."
+          },
+          "response": []
+        }
+      ],
+      "description": "Jira integration endpoints for connecting to Jira, fetching stories, and uploading test artifacts"
+    },
+    {
+      "name": "Generate Tests",
+      "item": [
+        {
+          "name": "Generate Test Cases from User Story",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"storyTitle\": \"User Login Feature\",\n  \"acceptanceCriteria\": \"Given a user with valid credentials\\nWhen they enter their email and password\\nThen they should be logged in successfully\",\n  \"description\": \"Implement user authentication system\",\n  \"additionalInfo\": \"Support both email and password authentication. Implement rate limiting for failed attempts.\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/generate-tests",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "generate-tests"]
+            },
+            "description": "Generate test cases from a user story. Returns JSON matching the expected schema."
+          },
+          "response": []
+        },
+        {
+          "name": "Generate Test Cases - Minimal",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"storyTitle\": \"Add Product to Cart\",\n  \"acceptanceCriteria\": \"Given a product is available\\nWhen user clicks add to cart\\nThen product should be added to cart\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/generate-tests",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "generate-tests"]
+            },
+            "description": "Generate test cases with minimal required fields (storyTitle and acceptanceCriteria only)"
+          },
+          "response": []
+        }
+      ],
+      "description": "Test case generation endpoints using LLM"
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://127.0.0.1:8080",
+      "type": "string",
+      "description": "Backend server URL"
+    }
+  ]
+}

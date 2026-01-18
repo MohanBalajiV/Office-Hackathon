@@ -1,0 +1,197 @@
+/* ===========================
+   JIRA UI — Complete Stylesheet
+   =========================== */
+
+:root{
+  /* Colors */
+  --bg: #F8FAFC;            /* slate-50 */
+  --surface:#FFFFFF;
+  --text:#0F172A;           /* slate-900 */
+  --muted:#64748B;          /* slate-500 */
+  --brand:#16a34a;          /* emerald-600 */
+  --brand-ink:#FFFFFF;
+  --accent:#2563EB;         /* blue-600 */
+  --border:#E2E8F0;         /* slate-200 */
+  --danger:#B91C1C;
+
+  /* Shape & shadow */
+  --radius:14px;
+  --shadow-sm:0 1px 2px rgba(15,23,42,.06);
+  --shadow-md:0 10px 24px rgba(2,6,23,.08);
+
+  /* Control sizing */
+  --control-h: 44px;        /* unify select/input/button heights */
+  --control-radius: 12px;
+}
+
+/* Base font for all Jira components */
+.jira-connector,
+.jira-dropdown,
+.results-container{
+  font:16px/1.6 ui-sans-serif, -apple-system, "Segoe UI", Inter, Roboto, Arial, "Noto Sans", "Helvetica Neue", "Apple Color Emoji","Segoe UI Emoji";
+  color: var(--text);
+}
+
+/* ---------- Buttons ---------- */
+.btn{
+  display:inline-flex;align-items:center;gap:.5rem;
+  height: var(--control-h);
+  padding:0 18px;border-radius: var(--control-radius);
+  background:#43b979;border:1px solid var(--border);color:var(--text);
+  font-weight:600;cursor:pointer;
+  transition:transform .18s ease, box-shadow .18s ease, background .18s ease;
+}
+.btn:hover{transform:translateY(-1px);box-shadow:var(--shadow-md);}
+.btn:active{transform:translateY(0);}
+.btn:disabled{opacity:.6;cursor:not-allowed;}
+.btn.primary{background:var(--brand);color:var(--brand-ink);border:none;}
+.btn.btn-outline{background:transparent;color:var(--brand);border:1px solid var(--brand);}
+.btn.small{height:36px;padding:0 12px;border-radius:10px;}
+.btn:focus-visible{
+  outline:3px solid color-mix(in srgb, var(--accent) 30%, transparent);
+  outline-offset:2px;
+}
+
+.jira-connect-btn{box-shadow:var(--shadow-sm);}
+
+/* ---------- Modal ---------- */
+.jira-modal-overlay{
+  position:fixed;inset:0;background:rgba(2,6,23,.5);
+  display:flex;align-items:center;justify-content:center;
+  padding:24px;z-index:50;
+}
+.jira-modal{
+  width:100%;max-width:520px;background:var(--surface);color:var(--text);
+  border:1px solid var(--border);border-radius:var(--radius);
+  box-shadow:var(--shadow-md);padding:24px;
+}
+
+/* ---------- Form ---------- */
+.form-subtitle{color:var(--muted);margin:-6px 0 12px 0;font-size:14px;}
+.form-container{display:flex;flex-direction:column;gap:14px;}
+.form-group{display:flex;flex-direction:column;gap:6px;}
+.form-label{font-weight:700;}
+
+.form-input,
+.form-textarea{
+  width:100%;
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:10px; /* base radius; overridden by control token below for inputs/selects */
+  padding:12px 14px;outline:none;
+  transition:border .15s ease, box-shadow .15s ease, background .15s ease;
+  color:var(--text);
+}
+
+/* Unify height for text-like inputs */
+input.form-input{
+  height: var(--control-h);
+  padding: 0 14px;
+  border-radius: var(--control-radius);
+  line-height: normal;
+}
+
+/* Select (dropdown): exact height + custom caret */
+select.form-input{
+  height: var(--control-h);
+  padding: 0 40px 0 14px;     /* right space for caret */
+  border-radius: var(--control-radius);
+  line-height: normal;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-image:
+    linear-gradient(transparent, transparent),
+    url("data:image/svg+xml,%3Csvg width='16' height='16' viewBox='0 0 20 20' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M5.5 7.5L10 12l4.5-4.5' stroke='%2364748B' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  background-size: 16px 16px;
+}
+
+/* Textarea keeps flexible height */
+.form-textarea{min-height:96px;resize:vertical;}
+
+.form-input:focus,
+.form-textarea:focus{
+  border-color:#93C5FD;
+  box-shadow:0 0 0 3px rgba(37,99,235,.2);
+}
+.input-invalid{border-color:#FCA5A5;}
+.field-hint{font-size:12px;color:var(--muted);}
+
+/* Password field with inline "Show/Hide" */
+.password-field{display:flex;gap:10px;align-items:center;}
+
+/* Error + Loading */
+.jira-error{
+  background:#FEE2E2;border:1px solid #FCA5A5;color:#7F1D1D;
+  padding:10px 12px;border-radius:10px;font-weight:600;
+}
+.jira-loading{color:var(--muted);font-size:14px;margin-top:6px;}
+
+/* Actions row (form buttons) */
+.jira-actions{display:flex;justify-content:flex-end;gap:10px;margin-top:8px;}
+/* Backwards-compatible form actions used by components */
+.form-actions{display:flex;justify-content:flex-end;align-items:center;gap:12px;margin-top:8px;}
+.submit-btn{
+  height: var(--control-h);
+  padding:0 18px;border:none;border-radius: var(--control-radius);
+  background:var(--brand);color:var(--brand-ink);font-weight:700;cursor:pointer;
+  transition:transform .18s ease, box-shadow .18s ease, background .18s ease;
+}
+.submit-btn:hover:not(:disabled){transform:translateY(-1px);box-shadow:var(--shadow-md);}
+.submit-btn:disabled{opacity:.6;cursor:not-allowed;}
+.submit-btn:focus-visible{
+  outline:3px solid color-mix(in srgb, var(--accent) 30%, transparent);
+  outline-offset:2px;
+}
+
+/* ---------- Results Card (Details) ---------- */
+.results-container{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:var(--radius);box-shadow:var(--shadow-sm);padding:18px;
+}
+.results-header{
+  display:flex;justify-content:space-between;align-items:center;gap:12px;
+  flex-wrap:wrap;margin-bottom:10px;
+}
+.results-title{margin:0;font-size:18px;}
+.results-meta{
+  font-size:13px;color:var(--muted);background:#F1F5F9;border:1px solid var(--border);
+  padding:4px 8px;border-radius:8px;
+}
+
+.jira-section{margin-top:14px;}
+.jira-section h5{
+  margin:0 0 6px 0;font-size:14px;color:var(--muted);
+  text-transform:uppercase;letter-spacing:.02em;
+}
+
+/* Rich text body from Jira */
+.jira-body{line-height:1.7;}
+.jira-body p{margin:0 0 .75rem;}
+.jira-body ul{list-style:disc;padding-left:1.25rem;margin:.25rem 0 .75rem;}
+.jira-body ol{list-style:decimal;padding-left:1.25rem;margin:.25rem 0 .75rem;}
+.jira-body code{
+  font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono","Courier New", monospace;
+  background:#F8FAFC;border:1px solid var(--border);padding:.1rem .3rem;border-radius:6px;
+}
+.jira-body a{color:var(--accent);text-decoration:underline;}
+.jira-body table{border-collapse:collapse;margin:.5rem 0;width:100%;}
+.jira-body th,.jira-body td{border:1px solid var(--border);padding:.5rem;text-align:left;}
+.jira-body blockquote{border-left:3px solid #E2E8F0;padding-left:.75rem;color:#475569;margin:.5rem 0;}
+
+/* ---------- Dropdown Container ---------- */
+.jira-dropdown{display:flex;flex-direction:column;gap:10px;margin-top:8px;}
+
+/* ---------- A11y Utility ---------- */
+.sr-only{
+  position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;
+  clip:rect(0,0,0,0);white-space:nowrap;border:0;
+}
+
+/* ---------- Small Responsive Tweaks ---------- */
+@media (max-width: 520px){
+  .jira-actions{flex-wrap:wrap;}
+  .form-actions{flex-wrap:wrap;}
+  .results-header{flex-direction:column;align-items:flex-start;}
+}
